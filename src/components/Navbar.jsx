@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-// import { Menu, X } from "lucide-react";
+import { IoIosMenu, IoMdClose } from "react-icons/io";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -19,12 +19,10 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-       
         <Link href="/" className="text-2xl font-bold text-teal-600">
           FashionStore
         </Link>
 
-        
         <ul className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
             <li key={link.path}>
@@ -43,7 +41,7 @@ const Navbar = () => {
         </ul>
 
         {/* Buttons */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden gap-4">
           <Link
             href="/login"
             className="border-2 rounded-full font-semibold border-teal-600 text-teal-600 px-4 py-1.5 hover:bg-teal-600 hover:text-white transition duration-300"
@@ -61,7 +59,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button className="md:hidden" onClick={() => setOpen(!open)}>
-          {open ? <p>o</p> : <p>x</p>}
+          {open ? <IoMdClose /> : <IoIosMenu />}
         </button>
       </div>
 
@@ -75,17 +73,13 @@ const Navbar = () => {
                   href={link.path}
                   onClick={() => setOpen(false)}
                   className={`text-base font-medium ${
-                    pathname === link.path
-                      ? "text-blue-600"
-                      : "text-gray-700"
+                    pathname === link.path ? "text-teal-600" : "text-gray-700"
                   }`}
                 >
                   {link.title}
                 </Link>
               </li>
             ))}
-
-           
 
             <Link
               href="/login"
