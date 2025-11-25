@@ -1,6 +1,6 @@
 const PromoBanner = () => {
   return (
-    <section className="py-20 bg-teal-600 text-white text-center rounded-2xl mx-4 md:mx-16 my-16">
+    <section className="py-20 bg-[#73AF6F] text-white text-center rounded-2xl mx-4 md:mx-16 my-16">
       <h2 className="text-3xl md:text-4xl font-bold mb-4">Spring Sale is Here!</h2>
       <p className="text-lg md:text-xl mb-6">Get up to 50% off on selected items. Limited time only!</p>
       <a
