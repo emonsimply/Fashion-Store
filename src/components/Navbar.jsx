@@ -41,7 +41,7 @@ const Navbar = () => {
         </ul>
 
         {/* Buttons */}
-        <div className="hidden gap-4">
+        <div className="hidden md:flex items-center gap-4">
           <Link
             href="/login"
             className="border-2 rounded-full font-semibold border-teal-600 text-teal-600 px-4 py-1.5 hover:bg-teal-600 hover:text-white transition duration-300"
