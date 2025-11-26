@@ -3,11 +3,14 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import Swal from "sweetalert2";
+import { FcGoogle } from "react-icons/fc";
+import Link from "next/link";
 
 export default function RegisterPage() {
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile, singInWithGoogle } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
+  // Handle Email + Password Registration
   const handleRegister = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -17,28 +20,19 @@ export default function RegisterPage() {
     const email = form.email.value;
     const password = form.password.value;
 
-    if (!name || !email || !password) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "All fields are required!",
-      });
-      setLoading(false);
-      return;
-    }
-
     try {
-      // 1️⃣ Create user in Firebase Auth
-      const userCredential = await createUser(email, password);
+      // 1️⃣ Create user in Firebase
+      const result = await createUser(email, password);
 
-      // 2️⃣ Update user profile (displayName)
-      await updateUserProfile(name);
+      // 2️⃣ Update profile
+      await updateUserProfile(name, "");
 
       Swal.fire({
         icon: "success",
         title: "Registered!",
-        text: "Your account has been created successfully.",
+        text: "Your account has been created.",
         timer: 1500,
+        showConfirmButton: false,
       });
 
       form.reset();
@@ -53,13 +47,39 @@ export default function RegisterPage() {
     }
   };
 
+  // Handle Google Login
+  const handleGoogleRegister = async () => {
+    try {
+      setLoading(true);
+      await singInWithGoogle();
+
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Logged in with Google.",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Google Login Failed",
+        text: error.message,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-teal-50 rounded-3xl px-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
+        {/* Title */}
         <h2 className="text-3xl font-bold text-center text-teal-600 mb-6">
           Register
         </h2>
 
+        {/* Register Form */}
         <form onSubmit={handleRegister} className="space-y-5">
           {/* Name */}
           <div>
@@ -97,7 +117,7 @@ export default function RegisterPage() {
             />
           </div>
 
-          {/* Submit Button */}
+          {/* Register Button */}
           <button
             type="submit"
             disabled={loading}
@@ -113,11 +133,38 @@ export default function RegisterPage() {
           </button>
         </form>
 
+        {/* Divider */}
+        <div className="flex items-center gap-4 my-6">
+          <div className="h-px bg-gray-300 flex-1"></div>
+          <span className="text-gray-500">OR</span>
+          <div className="h-px bg-gray-300 flex-1"></div>
+        </div>
+
+        {/* Google Button */}
+        <button
+          onClick={handleGoogleRegister}
+          disabled={loading}
+          className="
+            w-full border-2 rounded-full font-semibold
+            border-teal-600 text-teal-600
+            px-4 py-2 
+            hover:bg-teal-600 hover:text-white 
+            transition duration-300 flex items-center justify-center gap-2
+          "
+        >
+          <FcGoogle className="text-xl" />
+          {loading ? "Processing..." : "Register with Google"}
+        </button>
+
+        {/* Footer Link */}
         <p className="text-center text-gray-600 mt-4">
           Already have an account?{" "}
-          <a href="/login" className="text-teal-600 font-semibold hover:underline">
+          <Link
+            href="/login"
+            className="text-teal-600 font-semibold hover:underline"
+          >
             Login
-          </a>
+          </Link>
         </p>
       </div>
     </div>

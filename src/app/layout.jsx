@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
       >
         <AuthProvider>
         <Navbar></Navbar>
-        <div className="min-h-screen px-4 md:px-8 lg:px-16 py-6 max-w-7xl mx-auto">
+        <div className="min-h-screen max-w-7xl mx-auto px-4">
           {children}
         </div>
 

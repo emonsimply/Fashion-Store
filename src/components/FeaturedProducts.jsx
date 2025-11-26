@@ -4,25 +4,25 @@ const FeaturedProducts = () => {
       id: 1,
       name: "Red Dress",
       price: "$49.99",
-      img: "https://i.ebayimg.com/images/g/eBsAAOSw03lY7ahw/s-l400.jpg",
+      img: "https://www.foxbabyandco.com.au/cdn/shop/files/BA52855D-5C3D-454F-86CA-490A6715C508-301867.jpg?v=1727720383",
     },
     {
       id: 2,
       name: "Blue Shirt",
       price: "$29.99",
-      img: "https://i.ebayimg.com/images/g/xxxx/s-l400.jpg",
+      img: "https://twelvebd.com/cdn/shop/files/JS-SF-TM24-11WN-64676_S_5.jpg?v=1756707300&width=1946",
     },
     {
       id: 3,
       name: "Leather Bag",
       price: "$79.99",
-      img: "https://i.ebayimg.com/images/g/yyyy/s-l400.jpg",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLaL3usjspn9T02E87ZhiI4ma0u7GRv_I54g&s",
     },
     {
       id: 4,
       name: "Sneakers",
       price: "$59.99",
-      img: "https://i.ebayimg.com/images/g/zzzz/s-l400.jpg",
+      img: "https://www.vibrantbd.com/cdn/shop/files/88000101.jpg?v=1730351022",
     },
   ];
 
